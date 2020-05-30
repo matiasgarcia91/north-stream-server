@@ -23,10 +23,17 @@ router.post("/login", async (req, res, next) => {
     const passwordMatch = bcrypt.compareSync(password, user.password);
     if (!passwordMatch) return res.status(401).send("Wrong password");
 
+    if (user.socketId) {
+      req.io
+        .to(user.socketId)
+        .emit("Hey fuckface!", "This is mr server speaking, you're out");
+    }
+
     await user.update({ socketId });
     res.send({
       id: user.id,
       email,
+      fullName: user.fullName,
       message: "SocketID registered",
     });
   } catch (e) {

@@ -12,12 +12,17 @@ const app = express();
 app.use(cors());
 // app.use(index);
 app.use(express.json());
-app.use(userRouter);
 
 const server = http.createServer(app);
 
 const io = socketIo(server);
 
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
+
+app.use(userRouter);
 let interval;
 
 io.on("connection", socket => {
