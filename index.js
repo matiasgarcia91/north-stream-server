@@ -2,21 +2,17 @@ const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
 const User = require("./models").user;
+const userRouter = require("./user-router");
+const cors = require("cors");
 
 const port = process.env.PORT || 4001;
 // const index = require("./routes/index");
 
 const app = express();
+app.use(cors());
 // app.use(index);
-
-app.get("/users", async (req, res, next) => {
-  try {
-    const users = await User.findAll();
-    res.send(users);
-  } catch (e) {
-    next(e);
-  }
-});
+app.use(express.json());
+app.use(userRouter);
 
 const server = http.createServer(app);
 
