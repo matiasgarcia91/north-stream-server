@@ -41,4 +41,29 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
+router.post("/admin/login", async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) return res.status(404).send("No user with this email found");
+
+    const passwordMatch = bcrypt.compareSync(password, user.password);
+    if (!passwordMatch || !user.admin)
+      return res
+        .status(401)
+        .send("Unauthorized, wrong credentials or user not admin");
+
+    res.send({
+      id: user.id,
+      email,
+      fullName: user.fullName,
+      message: "Admin login",
+      admin: true,
+    });
+  } catch (e) {
+    next(e);
+  }
+});
+
 module.exports = router;
