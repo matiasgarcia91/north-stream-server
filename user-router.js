@@ -26,7 +26,7 @@ router.post("/login", async (req, res, next) => {
     if (user.socketId) {
       req.io
         .to(user.socketId)
-        .emit("Hey fuckface!", "This is mr server speaking, you're out");
+        .emit("kick-out", "This is mr server speaking, you're out");
     }
 
     await user.update({ socketId });
