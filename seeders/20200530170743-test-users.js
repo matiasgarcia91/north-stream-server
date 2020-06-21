@@ -7,13 +7,13 @@ module.exports = {
       {
         email: "mg@north.com",
         password: bcrypt.hashSync("test", 10),
-        fullName: "Ronaldo Cris",
+        fullName: "Cristiano Ronaldo",
         admin: false,
       },
       {
         email: "oli@north.com",
         password: bcrypt.hashSync("test", 10),
-        fullName: "Oliver u",
+        fullName: "Oliver Umpierre",
         admin: false,
       },
       {
