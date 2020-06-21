@@ -23,6 +23,10 @@ module.exports = {
       fullName: {
         type: Sequelize.STRING,
       },
+      admin: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
     });
   },
   down: (queryInterface, Sequelize) => {
