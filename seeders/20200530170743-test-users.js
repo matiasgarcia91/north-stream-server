@@ -22,6 +22,24 @@ module.exports = {
         fullName: "Admin Adminsson",
         admin: true,
       },
+      {
+        email: "jorn@northasg.com",
+        password: bcrypt.hashSync("test", 10),
+        fullName: "Jorn Toes",
+        admin: false,
+      },
+      {
+        email: "max@northasg.com",
+        password: bcrypt.hashSync("test", 10),
+        fullName: "Max Blom",
+        admin: false,
+      },
+      {
+        email: "holley.butler@northasg.com",
+        password: bcrypt.hashSync("test", 10),
+        fullName: "Holley Butler",
+        admin: false,
+      },
     ]);
   },
 
