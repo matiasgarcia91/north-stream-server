@@ -3,6 +3,7 @@ const http = require("http");
 const socketIo = require("socket.io");
 const userRouter = require("./user-router");
 const cors = require("cors");
+const Url = require("./models").streamUrl;
 
 const port = process.env.PORT || 4001;
 
@@ -20,6 +21,25 @@ app.use((req, res, next) => {
 });
 
 app.use(userRouter);
+
+app.patch("/url", async (req, res, next) => {
+  try {
+    const url = await Url.findByPk(1);
+    await url.update({ url: req.body.url });
+    res.send(url);
+  } catch (e) {
+    next(e);
+  }
+});
+
+app.get("/url", async (req, res, next) => {
+  try {
+    const url = await Url.findByPk(1);
+    res.send({ url: url.url });
+  } catch (e) {
+    next(e);
+  }
+});
 
 let interval;
 
