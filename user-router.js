@@ -105,7 +105,7 @@ router.patch("/block", async (req, res, next) => {
     req.io
       .to(user.socketId)
       .emit("end-stream", "This is mr server speaking, you're out");
-    return res.send(`User ${email} allowed into the stream`);
+    return res.send(`User ${email} blocked out of the stream`);
   } catch (e) {
     next(e);
   }
