@@ -111,4 +111,53 @@ router.patch("/block", async (req, res, next) => {
   }
 });
 
+router.patch("/allow-many", async (req, res, next) => {
+  try {
+    const { emails } = req.body;
+    if (!emails || !emails.length)
+      return res
+        .status(400)
+        .send(
+          "Please provide a list of email address to allow them into the stream"
+        );
+
+    const users = await User.findAll({ where: { email: emails } });
+
+    if (!users.length) return res.status(404).send(`Users not found`);
+    const userUpdates = users.map(async u => await u.update({ allowed: true }));
+    await Promise.all(userUpdates);
+
+    return res.send(`Users: ${emails} allowed into the stream`);
+  } catch (e) {
+    next(e);
+  }
+});
+
+router.patch("/block-many", async (req, res, next) => {
+  try {
+    const { emails } = req.body;
+    if (!emails || !emails.length)
+      return res
+        .status(400)
+        .send(
+          "Please provide a list of email address to block them from the stream"
+        );
+
+    const users = await User.findAll({ where: { email: emails } });
+
+    if (!users.length) return res.status(404).send(`Users not found`);
+    const userUpdates = users.map(async u => {
+      req.io
+        .to(u.socketId)
+        .emit("end-stream", "This is mr server speaking, you're out");
+      return await u.update({ allowed: false });
+    });
+    await Promise.all(userUpdates);
+
+    return res.send(`Users: ${emails} blocked from the stream`);
+  } catch (e) {
+    next(e);
+  }
+});
+
 module.exports = router;
