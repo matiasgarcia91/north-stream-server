@@ -20,7 +20,14 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(userRouter);
+const emailToLowerCase = (req, res, next) => {
+  if (req.body && req.body.email) {
+    req.body.email = req.body.email.trim().toLowerCase();
+  }
+  next();
+};
+
+app.use("/", emailToLowerCase, userRouter);
 
 app.patch("/url", async (req, res, next) => {
   try {
@@ -40,8 +47,6 @@ app.get("/url", async (req, res, next) => {
     next(e);
   }
 });
-
-let interval;
 
 io.on("connection", socket => {
   socket.on("connect", () => {

@@ -22,7 +22,7 @@ router.post("/login", async (req, res, next) => {
     if (!user.allowed)
       return res.status(401).send("Not allowed to join the stream yet");
 
-    const passwordMatch = bcrypt.compareSync(password, user.password);
+    const passwordMatch = password.trim() === user.password;
     if (!passwordMatch) return res.status(401).send("Invalid Credentials");
 
     if (user.socketId) {
@@ -50,7 +50,7 @@ router.post("/admin/login", async (req, res, next) => {
 
     if (!user) return res.status(404).send("No user with this email found");
 
-    const passwordMatch = bcrypt.compareSync(password, user.password);
+    const passwordMatch = password.trim() === user.password;
     if (!passwordMatch || !user.admin)
       return res
         .status(401)

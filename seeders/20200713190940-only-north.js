@@ -1,0 +1,198 @@
+"use strict";
+
+module.exports = {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.bulkInsert("users", [
+      {
+        fullName: "Carsten Bødker ",
+        email: "cb@elementsports.dk",
+        allowed: true,
+        password: "kip03l",
+      },
+      {
+        fullName: "Peter Tyushkevich (NorthKB)",
+        email: "petertpromo@gmail.com",
+        allowed: true,
+        password: "0qpj0m",
+      },
+      {
+        fullName: "Vinokurov Ilya ",
+        email: "5170616@gmail.com",
+        allowed: true,
+        password: "geuafe",
+      },
+      {
+        fullName: "Kuba Smok (NKB)",
+        email: "kuba.smok@hydrosfera.pl",
+        allowed: true,
+        password: "dnqyji",
+      },
+      {
+        fullName: "Erkki Soosaar",
+        email: "info@surfcenter.ee",
+        allowed: true,
+        password: "9b99hj",
+      },
+      {
+        fullName: "Taras Burmistr ",
+        email: "taras_br@yahoo.com",
+        allowed: true,
+        password: "gmrqs",
+      },
+      {
+        fullName: "Jose Hita Fernandez",
+        email: "jose@nomadkitesurf.com",
+        allowed: true,
+        password: "aky76l",
+      },
+      {
+        fullName: "Sebastian Salazar Botero",
+        email: "colombiakite@gmail.com",
+        allowed: true,
+        password: "xl13w9",
+      },
+      {
+        fullName: "Sebastian Salazar Botero",
+        email: "ssalazarb7@hotmail.com",
+        allowed: true,
+        password: "qtvxe",
+      },
+      {
+        fullName: "Santiago Soler ",
+        email: "santiago.soler@nkitesurfing.com",
+        allowed: true,
+        password: "vuzfvl",
+      },
+      {
+        fullName: "Diego Varela",
+        email: "diego.varela@nkitesurfing.com",
+        allowed: true,
+        password: "kimum5",
+      },
+      {
+        fullName: "Jose Manuel Fernandez (NKB)",
+        email: "jose@aquadynamics.lk",
+        allowed: true,
+        password: "lfwb4",
+      },
+      {
+        fullName: "Nico Vazquez Cano (NKB) ",
+        email: "nico@santatabla.com",
+        allowed: true,
+        password: "krphn6",
+      },
+      {
+        fullName: "Pablo Obarrio",
+        email: "pobarrio@bepeahi.com",
+        allowed: true,
+        password: "7pc4dd",
+      },
+      {
+        fullName: "Michael Aurin",
+        email: "contact@kitesurfattitude.com",
+        allowed: true,
+        password: "2ap7fba",
+      },
+      {
+        fullName: "Omar Abdel Fattah",
+        email: "omar.fattah@holix.co",
+        allowed: true,
+        password: "18kem",
+      },
+      {
+        fullName: "Jaida Mahmoud",
+        email: "jaida.mahmoud@holix.co",
+        allowed: true,
+        password: "s6y9tq",
+      },
+      {
+        fullName: "Karim Khouly",
+        email: "kkhouly@aucegypt.edu",
+        allowed: true,
+        password: "8gruqh",
+      },
+      {
+        fullName: "Mohamed Galal",
+        email: "sales@holix.co",
+        allowed: true,
+        password: "q805i5",
+      },
+      {
+        fullName: "Nico Kux",
+        email: "nico@kuxville.com",
+        allowed: true,
+        password: "xf86z9",
+      },
+      {
+        fullName: "Philippe Stamenic",
+        email: "ph_s@hotmail.fr",
+        allowed: true,
+        password: "p8thf9",
+      },
+      {
+        fullName: "W S Jeong",
+        email: "airwave105@naver.com",
+        allowed: true,
+        password: "iodut",
+      },
+      {
+        fullName: "Kim Jung-tae",
+        email: "airwave88@naver.com",
+        allowed: true,
+        password: "3h3j6m",
+      },
+      {
+        fullName: "Yuda Ettedgui",
+        email: "northkb.il@gmail.com",
+        allowed: true,
+        password: "2i0shb",
+      },
+      {
+        fullName: "Upul De Silva",
+        email: "office@surfschool-srilanka.com",
+        allowed: true,
+        password: "awm359",
+      },
+      {
+        fullName: "Satoshi Meguro",
+        email: "meguro@paraglider.co.jp",
+        allowed: true,
+        password: "zn47k",
+      },
+      {
+        fullName: "Yoji Kimura",
+        email: "info@bluefield-kumejima.com",
+        allowed: true,
+        password: "dnxk5g",
+      },
+      {
+        fullName: "Ariel Blaschke Peteri",
+        email: "ariel@sideonkitesurf.cl",
+        allowed: true,
+        password: "ae5c8f",
+      },
+      {
+        fullName: "Francisco Alvarez",
+        email: "francisco@sideonkitesurf.cl",
+        allowed: true,
+        password: "dhj1xq",
+      },
+      {
+        fullName: "Tomas Smits",
+        email: "tsmitsf@gmail.com",
+        allowed: true,
+        password: "f8cbz7",
+      },
+      {
+        fullName: "Hamish Bayly",
+        email: "hamishbayly@me.com",
+        allowed: true,
+        password: "k4hk1v",
+      },
+    ]);
+  },
+
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.bulkDelete("users", null, {});
+  },
+};
