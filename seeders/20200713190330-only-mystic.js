@@ -16,6 +16,12 @@ module.exports = {
         password: "65qc7o",
       },
       {
+        fullName: "Alexis Balladon",
+        email: "alexisballadon@hotmail.co.uk",
+        allowed: true,
+        password: "j38ayu",
+      },
+      {
         fullName: "Rafal Rzepka",
         email: "rafal@hydrosfera.pl",
         allowed: true,

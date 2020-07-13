@@ -70,6 +70,54 @@ module.exports = {
         fullName: "Extra User 7",
         allowed: true,
       },
+      {
+        email: "extraUser8@north.com",
+        password: "extra8",
+        fullName: "Extra User 8",
+        allowed: true,
+      },
+      {
+        email: "extraUser9@north.com",
+        password: "extra9",
+        fullName: "Extra User 9",
+        allowed: true,
+      },
+      {
+        email: "extraUser10@north.com",
+        password: "extra10",
+        fullName: "Extra User 10",
+        allowed: true,
+      },
+      {
+        email: "extraUser11@north.com",
+        password: "extra11",
+        fullName: "Extra User 11",
+        allowed: true,
+      },
+      {
+        email: "extraUser12@north.com",
+        password: "extra12",
+        fullName: "Extra User 12",
+        allowed: true,
+      },
+      {
+        email: "extraUser13@north.com",
+        password: "extra13",
+        fullName: "Extra User 13",
+        allowed: true,
+      },
+      {
+        email: "extraUser14@north.com",
+        password: "extra14",
+        fullName: "Extra User 14",
+        allowed: true,
+      },
+      {
+        email: "extraUser15@north.com",
+        password: "extra15",
+        fullName: "Extra User 15",
+        allowed: true,
+      },
     ]);
   },
 
