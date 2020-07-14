@@ -4,7 +4,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert("streamUrls", [
       {
-        url: "435883644",
+        url: "436540777",
       },
     ]);
   },
