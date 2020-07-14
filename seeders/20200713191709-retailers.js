@@ -267,6 +267,18 @@ module.exports = {
         allowed: false,
         password: "asdk9u",
       },
+      {
+        fullName: "You Love it",
+        email: "gerrit.bresges@googlemail.com",
+        allowed: false,
+        password: "jd7aja",
+      },
+      {
+        fullName: "wsm oldenburg",
+        email: "kai@wsmfunsport.de",
+        allowed: false,
+        password: "dahsyd",
+      },
     ]);
   },
 

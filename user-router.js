@@ -1,17 +1,7 @@
 const { Router } = require("express");
 const User = require("./models").user;
-const bcrypt = require("bcrypt");
 
 const router = new Router();
-
-router.get("/users", async (req, res, next) => {
-  try {
-    const users = await User.findAll();
-    res.send(users);
-  } catch (e) {
-    next(e);
-  }
-});
 
 router.post("/login", async (req, res, next) => {
   try {
@@ -155,6 +145,18 @@ router.patch("/block-many", async (req, res, next) => {
     await Promise.all(userUpdates);
 
     return res.send(`Users: ${emails} blocked from the stream`);
+  } catch (e) {
+    next(e);
+  }
+});
+
+router.patch("/password", async (req, res, next) => {
+  try {
+    if (!req.body.email) return res.status(400).send("provide email address");
+    const newPass = Math.random().toString(36).substring(7);
+    const user = await User.findOne({ where: { email: req.body.email } });
+    await user.update({ password: newPass });
+    res.send({ newPass });
   } catch (e) {
     next(e);
   }

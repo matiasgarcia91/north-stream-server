@@ -111,19 +111,6 @@ module.exports = {
         allowed: true,
         password: "dnxk5g",
       },
-
-      {
-        fullName: "Francisco Alvarez",
-        email: "francisco@sideonkitesurf.cl",
-        allowed: true,
-        password: "dhj1xq",
-      },
-      {
-        fullName: "Tomas Smits",
-        email: "tsmitsf@gmail.com",
-        allowed: true,
-        password: "f8cbz7",
-      },
       {
         fullName: "Hamish Bayly",
         email: "hamishbayly@me.com",
