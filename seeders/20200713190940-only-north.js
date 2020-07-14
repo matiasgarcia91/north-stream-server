@@ -58,18 +58,6 @@ module.exports = {
         password: "qtvxe",
       },
       {
-        fullName: "Santiago Soler ",
-        email: "santiago.soler@nkitesurfing.com",
-        allowed: true,
-        password: "vuzfvl",
-      },
-      {
-        fullName: "Diego Varela",
-        email: "diego.varela@nkitesurfing.com",
-        allowed: true,
-        password: "kimum5",
-      },
-      {
         fullName: "Jose Manuel Fernandez (NKB)",
         email: "jose@aquadynamics.lk",
         allowed: true,
@@ -92,36 +80,6 @@ module.exports = {
         email: "contact@kitesurfattitude.com",
         allowed: true,
         password: "2ap7fba",
-      },
-      {
-        fullName: "Omar Abdel Fattah",
-        email: "omar.fattah@holix.co",
-        allowed: true,
-        password: "18kem",
-      },
-      {
-        fullName: "Jaida Mahmoud",
-        email: "jaida.mahmoud@holix.co",
-        allowed: true,
-        password: "s6y9tq",
-      },
-      {
-        fullName: "Karim Khouly",
-        email: "kkhouly@aucegypt.edu",
-        allowed: true,
-        password: "8gruqh",
-      },
-      {
-        fullName: "Mohamed Galal",
-        email: "sales@holix.co",
-        allowed: true,
-        password: "q805i5",
-      },
-      {
-        fullName: "Nico Kux",
-        email: "nico@kuxville.com",
-        allowed: true,
-        password: "xf86z9",
       },
       {
         fullName: "Philippe Stamenic",
@@ -165,12 +123,7 @@ module.exports = {
         allowed: true,
         password: "dnxk5g",
       },
-      {
-        fullName: "Ariel Blaschke Peteri",
-        email: "ariel@sideonkitesurf.cl",
-        allowed: true,
-        password: "ae5c8f",
-      },
+
       {
         fullName: "Francisco Alvarez",
         email: "francisco@sideonkitesurf.cl",
