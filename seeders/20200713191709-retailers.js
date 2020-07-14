@@ -106,8 +106,8 @@ module.exports = {
         password: "9eimte",
       },
       {
-        fullName: "CSS",
-        email: "andy@cssports.com.au",
+        fullName: "CCS Sports",
+        email: "andy@ccsports.com.au",
         allowed: false,
         password: "dqsky",
       },
@@ -260,6 +260,12 @@ module.exports = {
         email: "lucasn@mackite.com",
         allowed: false,
         password: "zpawmj",
+      },
+      {
+        fullName: "Urge",
+        email: "bjorge@urge.no",
+        allowed: false,
+        password: "asdk9u",
       },
     ]);
   },

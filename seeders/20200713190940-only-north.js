@@ -46,18 +46,6 @@ module.exports = {
         password: "aky76l",
       },
       {
-        fullName: "Sebastian Salazar Botero",
-        email: "colombiakite@gmail.com",
-        allowed: true,
-        password: "xl13w9",
-      },
-      {
-        fullName: "Sebastian Salazar Botero",
-        email: "ssalazarb7@hotmail.com",
-        allowed: true,
-        password: "qtvxe",
-      },
-      {
         fullName: "Jose Manuel Fernandez (NKB)",
         email: "jose@aquadynamics.lk",
         allowed: true,

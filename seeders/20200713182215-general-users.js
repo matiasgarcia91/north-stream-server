@@ -669,6 +669,42 @@ module.exports = {
         allowed: true,
         password: "8oh77i",
       },
+      {
+        fullName: "Alex prieto",
+        email: "info@sctenerife.es",
+        allowed: true,
+        password: "dj6t4d",
+      },
+      {
+        fullName: "Sander",
+        email: "supplychain@northasg.com",
+        allowed: true,
+        password: "u98iyt",
+      },
+      {
+        fullName: "Kevin Pavlin",
+        email: "kevin.pavlin@gmail.com ",
+        allowed: true,
+        password: "sh3o1j",
+      },
+      {
+        fullName: "Sebastian Salazar Botero",
+        email: "colombiakite@gmail.com",
+        allowed: true,
+        password: "xl13w9",
+      },
+      {
+        fullName: "Sebastian Salazar Botero",
+        email: "ssalazarb7@hotmail.com",
+        allowed: true,
+        password: "qtvxe",
+      },
+      {
+        fullName: "Filip",
+        email: "fsevcik@autrange.cz",
+        allowed: true,
+        password: "u3jd91",
+      },
     ]);
   },
 
