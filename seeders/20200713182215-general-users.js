@@ -699,12 +699,6 @@ module.exports = {
         allowed: true,
         password: "qtvxe",
       },
-      {
-        fullName: "Filip",
-        email: "fsevcik@autrange.cz",
-        allowed: true,
-        password: "u3jd91",
-      },
     ]);
   },
 
