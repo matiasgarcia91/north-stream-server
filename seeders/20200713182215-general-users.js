@@ -347,13 +347,13 @@ module.exports = {
       },
       {
         fullName: "Sedat Celenk ",
-        email: "sedat@kiteacademy.com ",
+        email: "sedat@kiteacademy.com",
         allowed: true,
         password: "ikwwfc",
       },
       {
         fullName: "Mostafa Al Hussaini",
-        email: "mostafa@dukite.com ",
+        email: "mostafa@dukite.com",
         allowed: true,
         password: "oo0axh",
       },
@@ -665,7 +665,7 @@ module.exports = {
       },
       {
         fullName: "Steve Calder",
-        email: "steve.calder@northsails",
+        email: "steve.calder@northsails.com",
         allowed: true,
         password: "di6jt",
       },
@@ -695,7 +695,7 @@ module.exports = {
       },
       {
         fullName: "Kevin Pavlin",
-        email: "kevin.pavlin@gmail.com ",
+        email: "kevin.pavlin@gmail.com",
         allowed: true,
         password: "sh3o1j",
       },
@@ -710,6 +710,18 @@ module.exports = {
         email: "ssalazarb7@hotmail.com",
         allowed: true,
         password: "qtvxe",
+      },
+      {
+        fullName: "Michael Aurin",
+        email: "contact@kitesurfattitude.com",
+        allowed: true,
+        password: "2ap7fba",
+      },
+      {
+        fullName: "Raymond",
+        email: "ray-liao@hotmail.com",
+        allowed: true,
+        password: "dj7sh5",
       },
     ]);
   },
