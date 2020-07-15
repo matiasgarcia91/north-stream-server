@@ -723,6 +723,18 @@ module.exports = {
         allowed: true,
         password: "dj7sh5",
       },
+      {
+        fullName: "Anika",
+        email: "anika@northasg.com",
+        allowed: true,
+        password: "d8sja6",
+      },
+      {
+        fullName: "Luuk",
+        email: "luuk@northasg.com",
+        allowed: true,
+        password: "ch1js9",
+      },
     ]);
   },
 
