@@ -26,7 +26,13 @@ module.exports = {
         email: "control1@north.com",
         password: "control",
         fullName: "Retailers Control",
-        allowed: false,
+        allowed: true,
+      },
+      {
+        email: "controlAnnabel@north.com",
+        password: "control2",
+        fullName: "Retailers Control",
+        allowed: true,
       },
       {
         email: "extra1@live-northasg.com",
@@ -116,6 +122,36 @@ module.exports = {
         email: "extra15@live-northasg.com",
         password: "extra15",
         fullName: "Extra User 15",
+        allowed: true,
+      },
+      {
+        email: "extra16@live-northasg.com",
+        password: "extra16",
+        fullName: "Extra User 16",
+        allowed: true,
+      },
+      {
+        email: "extra17@live-northasg.com",
+        password: "extra17",
+        fullName: "Extra User 17",
+        allowed: true,
+      },
+      {
+        email: "extra18@live-northasg.com",
+        password: "extra18",
+        fullName: "Extra User 18",
+        allowed: true,
+      },
+      {
+        email: "extra19@live-northasg.com",
+        password: "extra19",
+        fullName: "Extra User 19",
+        allowed: true,
+      },
+      {
+        email: "extra20@live-northasg.com",
+        password: "extra20",
+        fullName: "Extra User 20",
         allowed: true,
       },
     ]);
