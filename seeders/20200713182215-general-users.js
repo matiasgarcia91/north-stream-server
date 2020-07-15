@@ -735,6 +735,24 @@ module.exports = {
         allowed: true,
         password: "ch1js9",
       },
+      {
+        fullName: "Glen",
+        email: "glen@northasg.com",
+        allowed: true,
+        password: "jd7asd",
+      },
+      {
+        fullName: "Vincent",
+        email: "vincent@northasg.com",
+        allowed: true,
+        password: "js8asd",
+      },
+      {
+        fullName: "Dewi",
+        email: "dewi@northasg.com",
+        allowed: true,
+        password: "dsac7a",
+      },
     ]);
   },
 

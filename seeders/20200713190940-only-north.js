@@ -64,12 +64,6 @@ module.exports = {
         password: "7pc4dd",
       },
       {
-        fullName: "Michael Aurin",
-        email: "contact@kitesurfattitude.com",
-        allowed: true,
-        password: "2ap7fba",
-      },
-      {
         fullName: "Philippe Stamenic",
         email: "ph_s@hotmail.fr",
         allowed: true,
