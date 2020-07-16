@@ -29,7 +29,7 @@ module.exports = {
         allowed: true,
       },
       {
-        email: "controlAnnabel@north.com",
+        email: "controlannabel@north.com",
         password: "control2",
         fullName: "Retailers Control",
         allowed: true,
