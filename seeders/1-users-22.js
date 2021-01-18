@@ -29,12 +29,6 @@ module.exports = {
         password: bcrypt.hashSync("4y2bik", 5),
       },
       {
-        fullName: "Marco",
-        email: "marco.m@northkb-mystic.it",
-        allowed: true,
-        password: bcrypt.hashSync("di7ra7", 5),
-      },
-      {
         fullName: "Adrian Drenciu",
         email: "office@shopextrem.ro",
         allowed: true,
