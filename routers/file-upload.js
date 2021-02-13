@@ -10,6 +10,8 @@ const upload = multer({ dest: "tmp/csv/" });
 const router = new Router();
 
 const createAccounts = async (userArray, amountOfDummies, dummyDomain) => {
+  // TO-DO: check for duplicates and remove.
+
   const userAccounts = userArray.map(u => ({
     fullName: u.fullName.trim(),
     email: u.email.trim().toLowerCase(),
@@ -71,4 +73,23 @@ router.post("/", upload.single("file"), function (req, res) {
     });
 });
 
+router.post("/reset-db", async (req, res) => {
+  try {
+    await User.destroy({
+      where: {},
+      truncate: true,
+    });
+
+    await User.create({
+      fullName: "Oliver",
+      email: "info@oliverumpierre.com",
+      allowed: true,
+      password: bcrypt.hashSync("freshnclean", 5),
+    });
+
+    res.send("DB reset complete");
+  } catch (e) {
+    console.log(e.message);
+  }
+});
 module.exports = router;
