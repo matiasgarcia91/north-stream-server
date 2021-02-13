@@ -1,7 +1,8 @@
 const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
-const userRouter = require("./user-router");
+const userRouter = require("./routers/users");
+const csvRouter = require("./routers/file-upload");
 const cors = require("cors");
 const Url = require("./models").streamUrl;
 
@@ -9,7 +10,6 @@ const port = process.env.PORT || 4001;
 
 const app = express();
 app.use(cors());
-app.use(express.json());
 
 const server = http.createServer(app);
 
@@ -27,9 +27,10 @@ const emailToLowerCase = (req, res, next) => {
   next();
 };
 
-app.use("/", emailToLowerCase, userRouter);
+app.use("/csv-upload", express.urlencoded({ extended: false }), csvRouter);
+app.use("/", express.json(), emailToLowerCase, userRouter);
 
-app.patch("/url", async (req, res, next) => {
+app.patch("/url", express.json(), async (req, res, next) => {
   try {
     const url = await Url.findByPk(1);
     await url.update({ url: req.body.url });
@@ -39,7 +40,7 @@ app.patch("/url", async (req, res, next) => {
   }
 });
 
-app.get("/url", async (req, res, next) => {
+app.get("/url", express.json(), async (req, res, next) => {
   try {
     const url = await Url.findByPk(1);
     res.send({ url: url.url });

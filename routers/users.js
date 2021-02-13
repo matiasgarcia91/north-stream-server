@@ -1,7 +1,11 @@
 const { Router } = require("express");
-const User = require("./models").user;
+const User = require("../models").user;
 const bcrypt = require("bcrypt");
+const fs = require("fs");
+const multer = require("multer");
+const csv = require("fast-csv");
 
+const upload = multer({ dest: "tmp/csv/" });
 const router = new Router();
 
 router.post("/login", async (req, res, next) => {
