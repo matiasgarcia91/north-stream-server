@@ -2,6 +2,7 @@ const { Router } = require("express");
 const fs = require("fs");
 const multer = require("multer");
 const csv = require("fast-csv");
+const bcrypt = require("bcrypt");
 
 const User = require("../models").user;
 
@@ -25,8 +26,13 @@ const createAccounts = async (userArray, amountOfDummies, dummyDomain) => {
 
   const allAccounts = [...userAccounts, ...dummyAccounts];
 
+  const hashedPasswords = allAccounts.map(a => ({
+    ...a,
+    password: bcrypt.hashSync(a.password, 4),
+  }));
+
   try {
-    await User.bulkCreate(allAccounts);
+    await User.bulkCreate(hashedPasswords);
     return allAccounts;
   } catch (e) {
     console.log("Sequelize error", e);
