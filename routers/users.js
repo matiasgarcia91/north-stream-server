@@ -26,7 +26,7 @@ router.post("/login", async (req, res, next) => {
         .emit("kick-out", "This is mr server speaking, you're out");
     }
 
-    await user.update({ socketId });
+    // await user.update({ socketId });
     res.send({
       id: user.id,
       email,
