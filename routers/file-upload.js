@@ -42,7 +42,8 @@ const createAccounts = async (userArray, amountOfDummies, dummyDomain) => {
 };
 
 router.post("/", upload.single("file"), function (req, res) {
-  const fileRows = [];
+  try {
+    const fileRows = [];
   // open uploaded file
   const amountOfDummies = req.body.dummies;
   const dummyDomain = req.body.domain;
@@ -71,6 +72,10 @@ router.post("/", upload.single("file"), function (req, res) {
         console.log(e.message);
       }
     });
+  } catch (e) {
+    console.log(e.message)
+  }
+  
 });
 
 router.post("/reset-db", async (req, res) => {
