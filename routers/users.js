@@ -17,8 +17,8 @@ router.post("/login", async (req, res, next) => {
     if (!user.allowed)
       return res.status(401).send("Not allowed to join the stream yet");
 
-    const passwordMatch = bcrypt.compareSync(password.trim(), user.password);
-    if (!passwordMatch) return res.status(401).send("Invalid Credentials");
+    // const passwordMatch = bcrypt.compareSync(password.trim(), user.password);
+    // if (!passwordMatch) return res.status(401).send("Invalid Credentials");
 
     if (user.socketId) {
       req.io
