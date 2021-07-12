@@ -170,7 +170,6 @@ router.patch("/password", async (req, res, next) => {
 router.post("/create-dummies", async (req, res, next) => {
   try {
     const { amount, dummyDomain } = req.body;
-    console.log('body', req.body)
     const dummyAccounts = [...Array(parseInt(amount))].map((_, i) => ({
       email: `backup${i}@${dummyDomain}.com`,
       fullName: `Backup Account ${i}`,
@@ -178,10 +177,9 @@ router.post("/create-dummies", async (req, res, next) => {
       allowed: true,
     }));
 
-    const hashedPasswords = dummyAccounts.map(d => ({ ...d, password: bcrypt.hashSync(b.password, 4) }))
+    const hashedPasswords = dummyAccounts.map(d => ({ ...d, password: bcrypt.hashSync(d.password, 4) }))
 
     await User.bulkCreate(hashedPasswords);
-
 
     res.send(dummyAccounts);
 
