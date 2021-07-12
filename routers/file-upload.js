@@ -93,15 +93,11 @@ router.post("/create-dummies", async (req, res, next) => {
 
     await User.bulkCreate(hashedPasswords);
 
-    const cleanAccounts = dummyAccounts.map(a => ({
-      fullName: a.fullName,
-      email: a.email,
-      password: a.password,
-    }));
-    res.send(cleanAccounts);
-    
-  } catch (e) {
 
+    res.send(dummyAccounts);
+
+  } catch (e) {
+    console.log(e.message);
   }
 })
 
