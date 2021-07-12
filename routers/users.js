@@ -167,4 +167,26 @@ router.patch("/password", async (req, res, next) => {
   }
 });
 
+router.post("/create-dummies", async (req, res, next) => {
+  try {
+    const { amount, dummyDomain } = req.body;
+    const dummyAccounts = [...Array(parseInt(amount))].map((_, i) => ({
+      email: `backup${i}@${dummyDomain}.com`,
+      fullName: `Backup Account ${i}`,
+      password: Math.random().toString(36).substring(7),
+      allowed: true,
+    }));
+
+    const hashedPasswords = dummyAccounts.map(d => ({ ...d, password: bcrypt.hashSync(b.password, 4) }))
+
+    await User.bulkCreate(hashedPasswords);
+
+
+    res.send(dummyAccounts);
+
+  } catch (e) {
+    console.log(e.message);
+  }
+})
+
 module.exports = router;
