@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       password: { type: DataTypes.STRING, allowNull: false },
       socketId: DataTypes.STRING,
       fullName: DataTypes.STRING,
+      admin: DataTypes.BOOLEAN,
       allowed: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
