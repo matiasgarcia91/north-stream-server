@@ -1,6 +1,5 @@
 const { Router } = require("express");
 const User = require("../models").user;
-const bcrypt = require("bcrypt");
 const fs = require("fs");
 const multer = require("multer");
 const csv = require("fast-csv");
@@ -17,7 +16,7 @@ router.post("/login", async (req, res, next) => {
     if (!user.allowed)
       return res.status(401).send("Not allowed to join the stream yet");
 
-    const passwordMatch = bcrypt.compareSync(password.trim(), user.password);
+    const passwordMatch = password.trim() == user.password;
     if (!passwordMatch) return res.status(401).send("Invalid Credentials");
 
     if (user.socketId) {
@@ -45,7 +44,7 @@ router.post("/admin/login", async (req, res, next) => {
 
     if (!user) return res.status(404).send("No user with this email found");
 
-    const passwordMatch = bcrypt.compareSync(password.trim(), user.password);
+    const passwordMatch = password.trim() === user.password;
     if (!passwordMatch || !user.admin)
       return res
         .status(401)
@@ -177,15 +176,17 @@ router.post("/create-dummies", async (req, res, next) => {
       allowed: true,
     }));
 
-    const hashedPasswords = dummyAccounts.map(d => ({ ...d, password: bcrypt.hashSync(d.password, 4) }))
+    const hashedPasswords = dummyAccounts.map(d => ({
+      ...d,
+      password: d.password,
+    }));
 
     await User.bulkCreate(hashedPasswords);
 
     res.send(dummyAccounts);
-
   } catch (e) {
     console.log(e.message);
   }
-})
+});
 
 module.exports = router;
