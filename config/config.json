@@ -1,11 +1,6 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "secret",
-    "database": "north-stream-server",
-    "host": "127.0.0.1",
-    "dialect": "postgres",
-    "operatorsAliases": false
+    "url": "postgres://kpcszohl:h0bpuLgmseIquEEMmFzAoifSknxsC6ik@hattie.db.elephantsql.com/kpcszohl"
   },
   "test": {
     "username": "root",
