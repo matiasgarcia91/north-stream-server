@@ -2,10 +2,11 @@ const { Router } = require("express");
 const { Op } = require("sequelize");
 
 const User = require("../models").user;
-const Url = require("../models").streamUrl;
+const Event = require("../models").event;
 
 const { generateP } = require("../lib/generate");
 const { sendEmails } = require("../lib/emails");
+const authMiddleware = require("../auth/middleware");
 
 const router = new Router();
 
@@ -21,7 +22,7 @@ Admin Router (Requires JWT)
     returns: User
 */
 router
-  .route("/users")
+  .route("/users", authMiddleware)
   .get(async (req, res, next) => {
     try {
       const users = await User.findAll({ raw: true });
@@ -67,7 +68,7 @@ router
     returns:
       - amount: Number
 */
-router.patch("/users/admin", async (req, res, next) => {
+router.patch("/users/admin", authMiddleware, async (req, res, next) => {
   try {
     const { userIds, admin } = req.body;
 
@@ -103,8 +104,8 @@ router
   .route("/url")
   .patch(async (req, res, next) => {
     try {
-      const url = await Url.findByPk(1);
-      await url.update({ url: req.body.url });
+      const url = await Event.findByPk(1);
+      await url.update({ streamUrl: req.body.url });
       res.send(url);
     } catch (e) {
       next(e);
@@ -112,15 +113,15 @@ router
   })
   .get(async (req, res, next) => {
     try {
-      const url = await Url.findByPk(1);
-      res.send({ url: url.url });
+      const event = await Event.findByPk(1);
+      res.send({ url: event.streamUrl });
     } catch (e) {
       next(e);
     }
   });
 
 //Sends an email to
-router.post("/users/email", async (req, res, next) => {
+router.post("/users/email", authMiddleware, async (req, res, next) => {
   try {
     const { userIds, all, subject, content } = req.body;
 
@@ -157,7 +158,7 @@ router.post("/users/email", async (req, res, next) => {
   }
 });
 
-router.post("/reset-db", async (req, res) => {
+router.post("/reset-db", authMiddleware, async (req, res) => {
   try {
     await User.destroy({
       where: {},
