@@ -7,6 +7,7 @@ const socketIo = require("socket.io");
 const authRouter = require("./routers/auth");
 const adminRouter = require("./routers/admin");
 const csvRouter = require("./routers/file-upload");
+const authMiddleware = require("./auth/middleware");
 const cors = require("cors");
 
 const port = process.env.PORT || 4001;
@@ -31,7 +32,7 @@ const emailToLowerCase = (req, res, next) => {
 };
 
 app.use("/csv-upload", express.urlencoded({ extended: false }), csvRouter);
-app.use("/admin", express.json(), adminRouter);
+app.use("/admin", express.json(), authMiddleware, adminRouter);
 app.use("/", express.json(), emailToLowerCase, authRouter);
 
 io.on("connection", socket => {

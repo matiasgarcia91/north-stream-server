@@ -3,7 +3,7 @@ const { Op } = require("sequelize");
 
 const User = require("../models").user;
 const Url = require("../models").streamUrl;
-const authMiddleware = require("../auth/middleware");
+
 const { generateP } = require("../lib/generate");
 const { sendEmails } = require("../lib/emails");
 
@@ -21,7 +21,7 @@ Admin Router (Requires JWT)
     returns: User
 */
 router
-  .route("/users", authMiddleware)
+  .route("/users")
   .get(async (req, res, next) => {
     try {
       const users = await User.findAll({ raw: true });
@@ -67,7 +67,7 @@ router
     returns:
       - amount: Number
 */
-router.patch("/users/admin", authMiddleware, async (req, res, next) => {
+router.patch("/users/admin", async (req, res, next) => {
   try {
     const { userIds, admin } = req.body;
 
@@ -100,7 +100,7 @@ router.patch("/users/admin", authMiddleware, async (req, res, next) => {
  */
 
 router
-  .route("/url", authMiddleware)
+  .route("/url")
   .patch(async (req, res, next) => {
     try {
       const url = await Url.findByPk(1);
