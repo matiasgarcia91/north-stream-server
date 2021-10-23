@@ -5,6 +5,7 @@ const User = require("../models").user;
 const Url = require("../models").streamUrl;
 const authMiddleware = require("../auth/middleware");
 const { generateP } = require("../lib/generate");
+const { sendEmails } = require("../lib/emails");
 
 const router = new Router();
 
@@ -99,7 +100,7 @@ router.patch("/users/admin", authMiddleware, async (req, res, next) => {
  */
 
 router
-  .router("/url", authMiddleware)
+  .route("/url", authMiddleware)
   .patch(async (req, res, next) => {
     try {
       const url = await Url.findByPk(1);
@@ -117,5 +118,63 @@ router
       next(e);
     }
   });
+
+//Sends an email to
+router.post("/users/email", async (req, res, next) => {
+  try {
+    const { userIds, all, subject, content } = req.body;
+
+    if (!all && (!userIds || !userIds.length))
+      return res.status(400).send("Wrong parameters");
+
+    const condition = all
+      ? { email: { [Op.notLike]: "backup%" } }
+      : { id: { [Op.in]: userIds } };
+
+    const users = await User.findAll({
+      where: condition,
+      attributes: ["id", "email"],
+      raw: true,
+    });
+
+    const emails = users.map(u => u.email);
+    const success = await sendEmails(emails, subject, content);
+
+    console.log("success", success);
+
+    const updated = users.map(u => u.id);
+    await User.update(
+      { emailSent: true },
+      {
+        where: { id: { [Op.in]: updated } },
+      }
+    );
+
+    res.send("sent");
+  } catch (e) {
+    console.log("broken in route", e.message);
+    next(e);
+  }
+});
+
+router.post("/reset-db", async (req, res) => {
+  try {
+    await User.destroy({
+      where: {},
+      truncate: true,
+    });
+
+    await User.create({
+      fullName: "Oliver",
+      email: "info@oliverumpierre.com",
+      allowed: true,
+      password: "freshnclean",
+    });
+
+    res.send("DB reset complete");
+  } catch (e) {
+    console.log(e.message);
+  }
+});
 
 module.exports = router;
