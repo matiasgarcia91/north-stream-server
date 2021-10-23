@@ -1,10 +1,8 @@
 const { Router } = require("express");
-const User = require("../models").user;
-const fs = require("fs");
-const multer = require("multer");
-const csv = require("fast-csv");
 
-const upload = multer({ dest: "tmp/csv/" });
+const User = require("../models").user;
+const { toJWT } = require("../auth/jwt");
+
 const router = new Router();
 
 router.post("/login", async (req, res, next) => {
@@ -50,13 +48,70 @@ router.post("/admin/login", async (req, res, next) => {
         .status(401)
         .send("Unauthorized, wrong credentials or user not admin");
 
+    const token = toJWT({ userId: user.id });
+
     res.send({
       id: user.id,
       email,
       fullName: user.fullName,
       message: "Admin login",
       admin: true,
+      token,
     });
+  } catch (e) {
+    next(e);
+  }
+});
+
+/*
+// Legacy endpoints
+// Enables a group of users to join the stream ==> should be tested again.
+router.patch("/allow-many", async (req, res, next) => {
+  try {
+    const { emails } = req.body;
+    if (!emails || !emails.length)
+      return res
+        .status(400)
+        .send(
+          "Please provide a list of email address to allow them into the stream"
+        );
+
+    const users = await User.findAll({ where: { email: emails } });
+
+    if (!users.length) return res.status(404).send(`Users not found`);
+    const userUpdates = users.map(async u => await u.update({ allowed: true }));
+    await Promise.all(userUpdates);
+
+    return res.send(`Users: ${emails} allowed into the stream`);
+  } catch (e) {
+    next(e);
+  }
+});
+
+
+// Kicks out a group of users from the stream ==> should be tested again.
+router.patch("/block-many", async (req, res, next) => {
+  try {
+    const { emails } = req.body;
+    if (!emails || !emails.length)
+      return res
+        .status(400)
+        .send(
+          "Please provide a list of email address to block them from the stream"
+        );
+
+    const users = await User.findAll({ where: { email: emails } });
+
+    if (!users.length) return res.status(404).send(`Users not found`);
+    const userUpdates = users.map(async u => {
+      req.io
+        .to(u.socketId)
+        .emit("end-stream", "This is mr server speaking, you're out");
+      return await u.update({ allowed: false });
+    });
+    await Promise.all(userUpdates);
+
+    return res.send(`Users: ${emails} blocked from the stream`);
   } catch (e) {
     next(e);
   }
@@ -105,55 +160,7 @@ router.patch("/block", async (req, res, next) => {
   }
 });
 
-router.patch("/allow-many", async (req, res, next) => {
-  try {
-    const { emails } = req.body;
-    if (!emails || !emails.length)
-      return res
-        .status(400)
-        .send(
-          "Please provide a list of email address to allow them into the stream"
-        );
-
-    const users = await User.findAll({ where: { email: emails } });
-
-    if (!users.length) return res.status(404).send(`Users not found`);
-    const userUpdates = users.map(async u => await u.update({ allowed: true }));
-    await Promise.all(userUpdates);
-
-    return res.send(`Users: ${emails} allowed into the stream`);
-  } catch (e) {
-    next(e);
-  }
-});
-
-router.patch("/block-many", async (req, res, next) => {
-  try {
-    const { emails } = req.body;
-    if (!emails || !emails.length)
-      return res
-        .status(400)
-        .send(
-          "Please provide a list of email address to block them from the stream"
-        );
-
-    const users = await User.findAll({ where: { email: emails } });
-
-    if (!users.length) return res.status(404).send(`Users not found`);
-    const userUpdates = users.map(async u => {
-      req.io
-        .to(u.socketId)
-        .emit("end-stream", "This is mr server speaking, you're out");
-      return await u.update({ allowed: false });
-    });
-    await Promise.all(userUpdates);
-
-    return res.send(`Users: ${emails} blocked from the stream`);
-  } catch (e) {
-    next(e);
-  }
-});
-
+// Re-generates password for user 
 router.patch("/password", async (req, res, next) => {
   try {
     if (!req.body.email) return res.status(400).send("provide email address");
@@ -166,6 +173,7 @@ router.patch("/password", async (req, res, next) => {
   }
 });
 
+// Creates an {amount} of dummyAccounts, generates passwords for them and sends them back
 router.post("/create-dummies", async (req, res, next) => {
   try {
     const { amount, dummyDomain } = req.body;
@@ -188,5 +196,7 @@ router.post("/create-dummies", async (req, res, next) => {
     console.log(e.message);
   }
 });
+
+*/
 
 module.exports = router;

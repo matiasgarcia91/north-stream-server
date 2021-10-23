@@ -5,6 +5,7 @@ const csv = require("fast-csv");
 const bcrypt = require("bcrypt");
 
 const User = require("../models").user;
+const { generateP } = require("../lib/generate");
 
 const upload = multer({ dest: "tmp/csv/" });
 const router = new Router();
@@ -16,7 +17,7 @@ const createAccounts = async (userArray, amountOfDummies, dummyDomain) => {
     fullName: u.fullName.trim(),
     email: u.email.trim().toLowerCase(),
     allowed: true,
-    password: Math.random().toString(36).substring(7),
+    password: generateP(),
   }));
 
   const allEmails = userAccounts.map(u => u.email);
@@ -27,7 +28,7 @@ const createAccounts = async (userArray, amountOfDummies, dummyDomain) => {
   const dummyAccounts = [...Array(parseInt(amountOfDummies))].map((_, i) => ({
     email: `backup${i}@${dummyDomain}.com`,
     fullName: `Backup Account ${i}`,
-    password: Math.random().toString(36).substring(7),
+    password: generateP(),
     allowed: true,
   }));
 
