@@ -2,7 +2,6 @@ const { Router } = require("express");
 const fs = require("fs");
 const multer = require("multer");
 const csv = require("fast-csv");
-const bcrypt = require("bcrypt");
 
 const User = require("../models").user;
 const { generateP } = require("../lib/generate");
@@ -76,23 +75,4 @@ router.post("/", upload.single("file"), function (req, res) {
   }
 });
 
-router.post("/reset-db", async (req, res) => {
-  try {
-    await User.destroy({
-      where: {},
-      truncate: true,
-    });
-
-    await User.create({
-      fullName: "Oliver",
-      email: "info@oliverumpierre.com",
-      allowed: true,
-      password: bcrypt.hashSync("freshnclean", 5),
-    });
-
-    res.send("DB reset complete");
-  } catch (e) {
-    console.log(e.message);
-  }
-});
 module.exports = router;

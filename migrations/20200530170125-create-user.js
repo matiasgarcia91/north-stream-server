@@ -27,6 +27,10 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
+      emailSent: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
       allowed: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
