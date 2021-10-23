@@ -8,7 +8,15 @@ module.exports = {
         fullName: "Oliver",
         email: "info@oliverumpierre.com",
         allowed: true,
-        password: bcrypt.hashSync("freshnclean", 5),
+        password: "freshnclean",
+        admin: true,
+      },
+      {
+        fullName: "Oliver",
+        email: "matiasigarcia91@gmail.com",
+        allowed: true,
+        password: "freshnclean",
+        admin: true,
       },
     ]);
   },
