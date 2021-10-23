@@ -8,6 +8,8 @@ module.exports = {
         name: "North Sails Live Stream",
         watermark: true,
         livechatId: "145123",
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     ]);
   },
