@@ -11,8 +11,6 @@ const upload = multer({ dest: "tmp/csv/" });
 const router = new Router();
 
 const createAccounts = async (userArray, amountOfDummies, dummyDomain) => {
-  // TO-DO: check for duplicates and remove.
-  console.log(userArray);
   const userAccounts = userArray.map(u => ({
     fullName: u.fullName.trim(),
     email: u.email.trim().toLowerCase(),
