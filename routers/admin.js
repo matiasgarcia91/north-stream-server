@@ -178,4 +178,13 @@ router.post("/reset-db", authMiddleware, async (req, res) => {
   }
 });
 
+router.get("/event", async (req, res, next) => {
+  try {
+    const event = await Event.findByPk(1);
+    res.send({ event });
+  } catch (e) {
+    console.log(e.message);
+  }
+});
+
 module.exports = router;

@@ -1,6 +1,7 @@
 const { Router } = require("express");
 
 const User = require("../models").user;
+const Event = require("../models").event;
 const { toJWT } = require("../auth/jwt");
 
 const router = new Router();
@@ -35,7 +36,7 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-router.post("/admin/login", async (req, res, next) => {
+router.post("/login/admin", async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ where: { email } });
@@ -50,13 +51,18 @@ router.post("/admin/login", async (req, res, next) => {
 
     const token = toJWT({ userId: user.id });
 
+    const event = await Event.findByPk(1);
+
     res.send({
-      id: user.id,
-      email,
-      fullName: user.fullName,
-      message: "Admin login",
-      admin: true,
-      token,
+      user: {
+        id: user.id,
+        email,
+        fullName: user.fullName,
+        message: "Admin login",
+        admin: true,
+        token,
+      },
+      event,
     });
   } catch (e) {
     next(e);
