@@ -29,7 +29,7 @@ router
 
       const clean = users.map(({ socketId, ...u }) => ({
         ...u,
-        hasLoggedIn: !!u.socketId,
+        hasLoggedIn: !!socketId,
       }));
 
       res.send(clean);
@@ -186,16 +186,16 @@ router
 
       const cleanEvent = eventKeys.reduce(
         (acc, key) =>
-          !event1[key] && event1[key] !== false
+          !streamEvent[key] && streamEvent[key] !== false
             ? acc
-            : { ...acc, [key]: event1[key] },
+            : { ...acc, [key]: streamEvent[key] },
         {}
       );
       console.log(cleanEvent);
       const settings = await Event.findByPk(1);
 
       await settings.update(cleanEvent);
-      res.send({ events: settings });
+      res.send({ streamEvent: settings });
     } catch (e) {
       next(e);
     }
