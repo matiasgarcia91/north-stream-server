@@ -7,7 +7,7 @@ module.exports = {
         streamUrl: "438316874",
         name: "North Sails Live Stream",
         watermark: true,
-        livechatId: "145123",
+        livechatId: 145123,
         createdAt: new Date(),
         updatedAt: new Date(),
       },

@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     "event",
     {
       name: DataTypes.STRING,
-      livechatId: DataTypes.STRING,
+      livechatId: DataTypes.INTEGER,
       streamUrl: DataTypes.STRING,
       watermark: { type: DataTypes.BOOLEAN, defaultValue: true },
     },

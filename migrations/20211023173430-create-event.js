@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       livechatId: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
       },
       streamUrl: {
         type: Sequelize.STRING,

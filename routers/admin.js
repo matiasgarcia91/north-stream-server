@@ -94,33 +94,7 @@ router.patch("/users/admin", authMiddleware, async (req, res, next) => {
   }
 });
 
-/*
- ** /admin/url
- * PATCH => update stream url
- * GET => GET stream url
- */
-
-router
-  .route("/url")
-  .patch(async (req, res, next) => {
-    try {
-      const url = await Event.findByPk(1);
-      await url.update({ streamUrl: req.body.url });
-      res.send(url);
-    } catch (e) {
-      next(e);
-    }
-  })
-  .get(async (req, res, next) => {
-    try {
-      const event = await Event.findByPk(1);
-      res.send({ url: event.streamUrl });
-    } catch (e) {
-      next(e);
-    }
-  });
-
-//Sends an email to
+//Sends an email to all or selected users.
 router.post("/users/email", authMiddleware, async (req, res, next) => {
   try {
     const { userIds, all, subject, content } = req.body;
@@ -165,12 +139,24 @@ router.post("/reset-db", authMiddleware, async (req, res) => {
       truncate: true,
     });
 
-    await User.create({
-      fullName: "Oliver",
-      email: "info@oliverumpierre.com",
-      allowed: true,
-      password: "freshnclean",
-    });
+    await User.bulkCreate(
+      {
+        fullName: "Oliver",
+        email: "info@oliverumpierre.com",
+        allowed: true,
+        password: "freshnclean",
+        admin: true,
+        emailSent: false,
+      },
+      {
+        fullName: "Matias Garcia",
+        email: "matiasigarcia91@gmail.com",
+        allowed: true,
+        password: "freshnclean",
+        admin: true,
+        emailSent: false,
+      }
+    );
 
     res.send("DB reset complete");
   } catch (e) {
@@ -178,13 +164,41 @@ router.post("/reset-db", authMiddleware, async (req, res) => {
   }
 });
 
-router.get("/event", async (req, res, next) => {
-  try {
-    const event = await Event.findByPk(1);
-    res.send({ event });
-  } catch (e) {
-    console.log(e.message);
-  }
-});
+// /admin/event
+
+router
+  .route("/event")
+  .get(async (req, res, next) => {
+    try {
+      const event = await Event.findByPk(1);
+      res.send({ event });
+    } catch (e) {
+      console.log(e.message);
+    }
+  })
+  .patch(async (req, res, next) => {
+    try {
+      const { streamEvent } = req.body;
+      if (!streamEvent || !Object.keys(streamEvent).length)
+        return res.status(400).send("Incomplete event");
+
+      const eventKeys = ["livechatId", "streamUrl", "watermark", "name"];
+
+      const cleanEvent = eventKeys.reduce(
+        (acc, key) =>
+          !event1[key] && event1[key] !== false
+            ? acc
+            : { ...acc, [key]: event1[key] },
+        {}
+      );
+      console.log(cleanEvent);
+      const settings = await Event.findByPk(1);
+
+      await settings.update(cleanEvent);
+      res.send({ events: settings });
+    } catch (e) {
+      next(e);
+    }
+  });
 
 module.exports = router;
