@@ -22,7 +22,7 @@ Admin Router (Requires JWT)
     returns: User
 */
 router
-  .route("/users", authMiddleware)
+  .route("/users")
   .get(async (req, res, next) => {
     try {
       const users = await User.findAll({ raw: true });
@@ -54,6 +54,21 @@ router
       const newUser = await User.create(user);
 
       res.send(newUser);
+    } catch (e) {
+      next(e);
+    }
+  })
+  .delete(async (req, res, next) => {
+    try {
+      const userIds = req.body.userIds;
+      if (!userIds) return res.status(400).send("pass userIds");
+      const deleted = await User.destroy({
+        where: {
+          id: { [Op.in]: userIds },
+        },
+      });
+      console.log("deleted", deleted);
+      res.sendStatus(204);
     } catch (e) {
       next(e);
     }
@@ -114,12 +129,12 @@ router.post("/users/email", authMiddleware, async (req, res, next) => {
       raw: true,
     });
 
-    const emails = users.map(u => u.email);
+    const emails = users.map((u) => u.email);
     const success = await sendEmails(emails, subject, content);
 
     console.log("success", success);
 
-    const updated = users.map(u => u.id);
+    const updated = users.map((u) => u.id);
     await User.update(
       { emailSent: true },
       {
