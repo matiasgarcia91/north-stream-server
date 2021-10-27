@@ -99,6 +99,8 @@ router.post("/users/email", authMiddleware, async (req, res, next) => {
   try {
     const { userIds, all, subject, content } = req.body;
 
+    console.log(req.body);
+    return res.send("hello");
     if (!all && (!userIds || !userIds.length))
       return res.status(400).send("Wrong parameters");
 
@@ -176,7 +178,7 @@ router
       console.log(e.message);
     }
   })
-  .patch(async (req, res, next) => {
+  .patch(authMiddleware, async (req, res, next) => {
     try {
       const { streamEvent } = req.body;
       if (!streamEvent || !Object.keys(streamEvent).length)
