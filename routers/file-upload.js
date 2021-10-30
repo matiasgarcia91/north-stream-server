@@ -10,14 +10,14 @@ const upload = multer({ dest: "tmp/csv/" });
 const router = new Router();
 
 const createAccounts = async (userArray, amountOfDummies, dummyDomain) => {
-  const userAccounts = userArray.map(u => ({
+  const userAccounts = userArray.map((u) => ({
     fullName: u.fullName.trim(),
     email: u.email.trim().toLowerCase(),
     allowed: true,
     password: generateP(),
   }));
 
-  const allEmails = userAccounts.map(u => u.email);
+  const allEmails = userAccounts.map((u) => u.email);
   const noDuplicates = userAccounts.filter(
     (u, i) => !allEmails.includes(u.email, i + 1)
   );
@@ -47,7 +47,7 @@ router.post("/", upload.single("file"), function (req, res) {
     const dummyDomain = req.body.domain;
     fs.createReadStream(req.file.path)
       .pipe(csv.parse({ headers: true }))
-      .on("data", data => {
+      .on("data", (data) => {
         fileRows.push(data); // push each row
       })
       .on("end", async () => {
@@ -60,7 +60,7 @@ router.post("/", upload.single("file"), function (req, res) {
             amountOfDummies,
             dummyDomain
           );
-          const cleanAccounts = accounts.map(a => ({
+          const cleanAccounts = accounts.map((a) => ({
             fullName: a.fullName,
             email: a.email,
             password: a.password,
@@ -72,6 +72,7 @@ router.post("/", upload.single("file"), function (req, res) {
       });
   } catch (e) {
     console.log(e.message);
+    next(e);
   }
 });
 

@@ -110,12 +110,12 @@ router.patch("/users/admin", authMiddleware, async (req, res, next) => {
 });
 
 //Sends an email to all or selected users.
-router.post("/users/email", authMiddleware, async (req, res, next) => {
+router.post("/users/email", async (req, res, next) => {
   try {
     const { userIds, all, subject, content } = req.body;
 
     console.log(req.body);
-    return res.send("hello");
+
     if (!all && (!userIds || !userIds.length))
       return res.status(400).send("Wrong parameters");
 
