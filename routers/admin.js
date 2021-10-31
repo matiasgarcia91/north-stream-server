@@ -22,7 +22,7 @@ Admin Router (Requires JWT)
     returns: User
 */
 router
-  .route("/users")
+  .route("/users", authMiddleware)
   .get(async (req, res, next) => {
     try {
       const users = await User.findAll({ raw: true });
@@ -110,7 +110,7 @@ router.patch("/users/admin", authMiddleware, async (req, res, next) => {
 });
 
 //Sends an email to all or selected users.
-router.post("/users/email", async (req, res, next) => {
+router.post("/users/email", authMiddleware, async (req, res, next) => {
   try {
     const { userIds, all, subject, content } = req.body;
 
@@ -125,14 +125,11 @@ router.post("/users/email", async (req, res, next) => {
 
     const users = await User.findAll({
       where: condition,
-      attributes: ["id", "email"],
+      attributes: ["id", "email", "password"],
       raw: true,
     });
 
-    const emails = users.map((u) => u.email);
-    const success = await sendEmails(emails, subject, content);
-
-    console.log("success", success);
+    await sendEmails(users, subject, content);
 
     const updated = users.map((u) => u.id);
     await User.update(
