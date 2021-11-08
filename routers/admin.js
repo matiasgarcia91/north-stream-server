@@ -128,7 +128,7 @@ router.post("/users/email", authMiddleware, async (req, res, next) => {
       attributes: ["id", "email", "password"],
       raw: true,
     });
-
+    console.log(users);
     await sendEmails(users, subject, content);
 
     const updated = users.map((u) => u.id);
