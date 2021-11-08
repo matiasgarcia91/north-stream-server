@@ -110,11 +110,9 @@ router.patch("/users/admin", authMiddleware, async (req, res, next) => {
 });
 
 //Sends an email to all or selected users.
-router.post("/users/email", authMiddleware, async (req, res, next) => {
+router.post("/users/email", async (req, res, next) => {
   try {
     const { userIds, all, subject, content } = req.body;
-
-    console.log(req.body);
 
     if (!all && (!userIds || !userIds.length))
       return res.status(400).send("Wrong parameters");
@@ -125,7 +123,7 @@ router.post("/users/email", authMiddleware, async (req, res, next) => {
 
     const users = await User.findAll({
       where: condition,
-      attributes: ["id", "email", "password"],
+      attributes: ["id", "email", "password", "fullName"],
       raw: true,
     });
     console.log(users);
