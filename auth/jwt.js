@@ -7,8 +7,12 @@ function toJWT(data) {
   return jwt.sign(data, jwtSecret, { expiresIn: "2h" });
 }
 
+function toEternalJWT(data) {
+  return jwt.sign(data, jwtSecret);
+}
+
 function toData(token) {
   return jwt.verify(token, jwtSecret);
 }
 
-module.exports = { toJWT, toData };
+module.exports = { toJWT, toData, toEternalJWT };
