@@ -127,15 +127,13 @@ router.post("/users/email", async (req, res, next) => {
       raw: true,
     });
     console.log(users);
-    await sendEmails(users, subject, content);
+    // await sendEmails(users, subject, content);
 
     const updated = users.map((u) => u.id);
-    await User.update(
-      { emailSent: true },
-      {
-        where: { id: { [Op.in]: updated } },
-      }
-    );
+    await User.increment("emailSent", {
+      by: 1,
+      where: { id: { [Op.in]: updated } },
+    });
 
     res.send("sent");
   } catch (e) {

@@ -28,8 +28,8 @@ module.exports = {
         defaultValue: false,
       },
       emailSent: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
       },
       emailOpened: {
         type: Sequelize.BOOLEAN,

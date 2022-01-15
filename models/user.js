@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: true,
       },
       emailSent: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
       },
       emailOpened: {
         type: DataTypes.BOOLEAN,
