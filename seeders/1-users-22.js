@@ -10,6 +10,7 @@ module.exports = {
         password: "freshnclean",
         admin: true,
         emailSent: false,
+        emailOpened: false,
       },
       {
         fullName: "Matias Garcia",
@@ -18,6 +19,7 @@ module.exports = {
         password: "freshnclean",
         admin: true,
         emailSent: false,
+        emailOpened: false,
       },
     ]);
   },

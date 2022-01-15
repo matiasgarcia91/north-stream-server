@@ -2,7 +2,7 @@ const { Router } = require("express");
 
 const User = require("../models").user;
 const Event = require("../models").event;
-const { toJWT } = require("../auth/jwt");
+const { toJWT, toData } = require("../auth/jwt");
 
 const router = new Router();
 
@@ -63,6 +63,21 @@ router.post("/login/admin", async (req, res, next) => {
         token,
       },
       event,
+    });
+  } catch (e) {
+    next(e);
+  }
+});
+
+router.patch("/auth/confirm", async (req, res, next) => {
+  try {
+    const { token } = req.body;
+    const data = toData(token);
+    const user = await User.findByPk(data.userId);
+    console.log(user);
+    await user.update({ emailOpened: true });
+    res.send({
+      confirmation: { accessCode: user.password, fullName: user.fullName },
     });
   } catch (e) {
     next(e);

@@ -22,7 +22,7 @@ Admin Router (Requires JWT)
     returns: User
 */
 router
-  .route("/users", authMiddleware)
+  .route("/users")
   .get(async (req, res, next) => {
     try {
       const users = await User.findAll({ raw: true });
@@ -58,7 +58,7 @@ router
       next(e);
     }
   })
-  .delete(async (req, res, next) => {
+  .put(async (req, res, next) => {
     try {
       const userIds = req.body.userIds;
       if (!userIds) return res.status(400).send("pass userIds");
