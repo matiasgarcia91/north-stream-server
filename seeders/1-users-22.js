@@ -9,7 +9,7 @@ module.exports = {
         allowed: true,
         password: "freshnclean",
         admin: true,
-        emailSent: false,
+        emailSent: 0,
         emailOpened: false,
       },
       {
@@ -18,7 +18,7 @@ module.exports = {
         allowed: true,
         password: "freshnclean",
         admin: true,
-        emailSent: false,
+        emailSent: 0,
         emailOpened: false,
       },
     ]);
