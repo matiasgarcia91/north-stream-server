@@ -127,7 +127,7 @@ router.post("/users/email", async (req, res, next) => {
       raw: true,
     });
     console.log(users);
-    // await sendEmails(users, subject, content);
+    await sendEmails(users, subject, content);
 
     const updated = users.map((u) => u.id);
     await User.increment("emailSent", {
