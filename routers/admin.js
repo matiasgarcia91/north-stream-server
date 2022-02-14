@@ -149,14 +149,14 @@ router.post("/reset-db", authMiddleware, async (req, res) => {
       truncate: true,
     });
 
-    await User.bulkCreate(
+    await User.bulkCreate([
       {
         fullName: "Oliver",
         email: "info@oliverumpierre.com",
         allowed: true,
         password: "freshnclean",
         admin: true,
-        emailSent: false,
+        emailSent: 0,
       },
       {
         fullName: "Matias Garcia",
@@ -164,11 +164,13 @@ router.post("/reset-db", authMiddleware, async (req, res) => {
         allowed: true,
         password: "freshnclean",
         admin: true,
-        emailSent: false,
-      }
-    );
+        emailSent: 0,
+      },
+    ]);
 
-    res.send("DB reset complete");
+    const users = await User.findAll();
+
+    res.send({ message: "DB reset complete", users });
   } catch (e) {
     console.log(e.message);
   }
