@@ -1,2 +1,2 @@
+web: npm start
 release: bash postrelease.sh
-web: node index.js
