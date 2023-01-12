@@ -30,11 +30,15 @@ const emailToLowerCase = (req, res, next) => {
   next();
 };
 
+app.get("/", (req, res) => {
+  res.send("Hello, welcome!");
+});
+
 app.use("/csv-upload", express.urlencoded({ extended: false }), csvRouter);
 app.use("/admin", express.json(), adminRouter);
 app.use("/", express.json(), emailToLowerCase, authRouter);
 
-io.on("connection", socket => {
+io.on("connection", (socket) => {
   socket.on("connect", () => {
     console.log("Client Connected");
   });
