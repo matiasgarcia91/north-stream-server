@@ -10,6 +10,7 @@ const upload = multer({ dest: "tmp/csv/" });
 const router = new Router();
 
 const createAccounts = async (userArray, amountOfDummies, dummyDomain) => {
+  console.log(JSON.stringify(userArray, null, 2));
   const userAccounts = userArray.map((u) => ({
     fullName: u.fullName.trim(),
     email: u.email.trim().toLowerCase(),
