@@ -47,7 +47,7 @@ router.post("/", upload.single("file"), function (req, res) {
     const amountOfDummies = req.body.dummies;
     const dummyDomain = req.body.domain;
     fs.createReadStream(req.file.path)
-      .pipe(csv.parse({ headers: true }))
+      .pipe(csv.parse({ headers: true, delimiter: ";" }))
       .on("data", (data) => {
         fileRows.push(data); // push each row
       })
